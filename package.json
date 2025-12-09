@@ -1,0 +1,14 @@
+{
+    "name": "face-compare-app",
+    "version": "1.0.0",
+    "description": "Privacy-focused face comparison app",
+    "scripts": {
+        "start": "concurrently \"npm run server\" \"npm run client\"",
+        "server": "cd backend && npm run dev",
+        "client": "cd frontend && npm start",
+        "build": "cd frontend && npm run build"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
+}
