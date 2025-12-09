@@ -9,7 +9,9 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.NODE_ENV === 'production'
+      ? ["http://localhost:3000", "http://localhost"]
+      : "http://localhost:3000",
     methods: ["GET", "POST"]
   },
   maxHttpBufferSize: 10e6 // 10MB for image uploads
