@@ -223,13 +223,13 @@ io.on('connection', (socket) => {
           // Optionally notify participants
           socket.to(socket.sessionId).emit('admin-disconnected');
         } else {
-          // Remove participant from list
-          session.participants = session.participants.filter(p => p.socketId !== socket.id);
+          // Participant disconnected
+          // We DO NOT remove them from the participants list so the Admin user 
+          // keeps the history/gallery of who verified.
+          console.log(`Participant ${socket.id} disconnected from session ${socket.sessionId}`);
 
-          // Notify admin
-          io.to(session.adminId).emit('participant-left', {
-            participantCount: session.participants.length
-          });
+          // Optionally mark them as offline if we track online status in the future
+          // session.participants.find(p => p.socketId === socket.id).online = false;
         }
 
         // Clean up empty sessions (no admin, no participants)
